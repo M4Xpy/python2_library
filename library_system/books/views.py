@@ -130,10 +130,13 @@ class LoanListView(generic.ListView):
         return context
 
     def get_queryset(self):
-        queryset = Loan.objects.all()
+        queryset = Loan.objects.select_related('book', 'client')
 
         client_name = self.request.GET.get("client_name")
+        book_title = self.request.GET.get("book_title")
         if client_name:
             return queryset.filter(client__name__icontains=client_name)
+        if book_title:
+            return queryset.filter(book__title__icontains=book_title)
 
         return queryset

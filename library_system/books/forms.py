@@ -32,3 +32,9 @@ class LoanSearchForm(forms.Form):
         label="",
         widget=forms.TextInput(attrs={"placeholder": "Search loans by debtor name"}),
     )
+    book_title = forms.CharField(
+        max_length=255,
+        required=False,
+        label="",
+        widget=forms.TextInput(attrs={"placeholder": "Search loans by book  title"}),
+    )
