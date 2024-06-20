@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Library System</title>
+</head>
+<body>
+<h1>Library Service</h1>
+<a href="/books">All Books</a>
+<a href="/authors">All Authors</a>
+<a href="/loans">All Loans</a>
+<h2>Loans</h2>
+<table>
+  <thead>
+  <tr>
+    <th>Book</th>
+    <th>Client</th>
+    <th>Loan Date</th>
+    <th>Return Date</th>
+    <th>Status</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for loan in loans %}
+  <tr>
+    <td>{{ loan.book.title }}</td>
+    <td>{{ loan.client.name }}</td>
+    <td>{{ loan.loan_date }}</td>
+    <td>{{ loan.return_date }}</td>
+    <td>
+      {% if loan.is_overdue %}
+      <span style="color: red;">Overdue</span>
+      {% elif loan.days_until_due <= 7 %}
+      <span style="color: #787838;">Due soon</span>
+      {% else %}
+      <span style="color: green;">On time</span>
+      {% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</body>
+</html>
