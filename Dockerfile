@@ -17,10 +17,6 @@ EXPOSE 8000
 ENV PYTHONUNBUFFERED 1
 
 # Run manage.py collectstatic to gather static files
-RUN python /library_system/manage.py collectstatic --noinput
+RUN python ./library_system/manage.py collectstatic --noinput
 
-# Run the Django migrations
-RUN python /library_system/manage.py migrate
 
-# Define the command to run the Django development server
-CMD ["python", "/library_system/manage.py", "runserver", "0.0.0.0:8000"]
