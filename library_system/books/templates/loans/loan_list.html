@@ -1,0 +1,33 @@
+{% load crispy_forms_tags %}
+
+<form method="get" action="" class="form-inline  line-gap">
+  {{ search_form|crispy }}
+  <input class="btn btn-secondary" type="submit" value="🔍">
+</form>
+<title>Loan list</title>
+<h1>Viewing debtor data</h1>
+<h2>Loans</h2>
+<table>
+  <thead>
+  <tr>
+    <th>Book</th>
+    <th>Client</th>
+    <th>Loan Date</th>
+    <th>Return Date</th>
+    <th>Status</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for loan in loan_list %}
+  <tr>
+    {% if loan.is_overdue %}
+    <td>{{ loan.book.title }}</td>
+    <td>{{ loan.client.name }}</td>
+    <td>{{ loan.loan_date }}</td>
+    <td>{{ loan.return_date }}</td>
+    <td>{{ loan.is_overdue }}</td>
+    {% endif %}
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
