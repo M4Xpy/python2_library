@@ -18,3 +18,13 @@ pip install requirements.txt
 python library_system/manage.py runserver # starts Django project
 ```
 
+
+# Run with docker
+
+Docker should be installed
+
+```shell
+ sudo docker compose up --build
+```
+
+
