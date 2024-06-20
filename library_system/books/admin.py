@@ -1,3 +1,11 @@
 from django.contrib import admin
 
-# Register your models here.
+from . import models
+
+for model in (
+    models.Author,
+    models.Book,
+    models.Client,
+    models.Loan,
+):
+    admin.site.register(model)
