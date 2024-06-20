@@ -1,0 +1,6 @@
+<h1>{{ object|yesno:"Update,Create" }} the author</h1>
+<form action="" method="post" novalidate>
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="Submit" class="btn btn-primary">
+</form>
