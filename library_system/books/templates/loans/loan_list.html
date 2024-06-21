@@ -34,6 +34,7 @@
       <th>Loan Date</th>
       <th>Return Date</th>
       <th>Update</th>
+      <th>Delete</th>
     </tr>
     </thead>
     <tbody>
@@ -45,6 +46,9 @@
       <td>{{ loan.loan_date }}</td>
       <td>{{ loan.return_date }}</td>
       <td><a href="{% url 'loans:loan-update' pk=loan.id %}">Update</a></td>
+      <td><a
+          style="color: red" href="{% url 'loans:loan-delete' pk=loan.id %}">
+        Delete</a></td>
       {% endif %}
     </tr>
     {% endfor %}
