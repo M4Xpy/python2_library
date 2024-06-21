@@ -5,10 +5,11 @@ from . import views
 urlpatterns = [
     url(r"^$", views.index, name="index"),
     url(
-        r"^loans/$",
-        views.LoanListView.as_view(),
-        name="loan-list",
+        r"^clients/create/$",
+        views.ClientCreateView.as_view(),
+        name="client-create",
     ),
+
     url(
         r"^authors/$",
         views.AuthorListView.as_view(),
@@ -48,6 +49,26 @@ urlpatterns = [
         r"^books/(?P<pk>\d+)/delete/$",
         views.BookDeleteView.as_view(),
         name="book-delete",
+    ),
+    url(
+        r"^loans/$",
+        views.LoanListView.as_view(),
+        name="loan-list",
+    ),
+    url(
+        r"^loans/create/$",
+        views.LoanCreateView.as_view(),
+        name="loan-create",
+    ),
+    url(
+        r"^loans/(?P<pk>\d+)/update/$",
+        views.LoanUpdateView.as_view(),
+        name="loan-update",
+    ),
+    url(
+        r"^loans/(?P<pk>\d+)/delete/$",
+        views.LoanDeleteView.as_view(),
+        name="loan-delete",
     ),
 ]
 

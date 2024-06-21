@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views import generic
 
 from .forms import BookSearchForm, AuthorSearchForm, LoanSearchForm
-from .models import Book, Loan, Author
+from .models import Book, Loan, Author, Client
 
 
 class AuthorListView(generic.ListView):
@@ -65,6 +65,15 @@ def index(request):
             "loans": Loan.objects.all(),
         },
     )
+
+
+class ClientCreateView(generic.CreateView):
+    model = Client
+    template_name = "clients/client_form.html"
+    fields = "__all__"
+
+    def get_success_url(self):
+        return self.request.META.get('HTTP_REFERER')
 
 
 class BookListView(generic.ListView):
@@ -140,3 +149,29 @@ class LoanListView(generic.ListView):
             return queryset.filter(book__title__icontains=book_title)
 
         return queryset
+
+
+class LoanCreateView(generic.CreateView):
+    model = Loan
+    template_name = "loans/loan_form.html"
+    fields = "__all__"
+
+    def get_success_url(self):
+        return reverse("loans:loan-list")
+
+
+class LoanUpdateView(generic.UpdateView):
+    model = Loan
+    template_name = "loans/loan_form.html"
+    fields = "__all__"
+
+    def get_success_url(self):
+        return reverse("loans:loan-list")
+
+
+class LoanDeleteView(generic.DeleteView):
+    model = Loan
+    template_name = "loans/loan_confirm_delete.html"
+
+    def get_success_url(self):
+        return reverse("loans:loan-list")
