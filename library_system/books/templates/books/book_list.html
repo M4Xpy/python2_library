@@ -1,41 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Book list</title>
+  <link rel="stylesheet" href="../../static/index.css"/>
+</head>
+<body>
 {% load crispy_forms_tags %}
-
-<title>Book list</title>
-<a href="/books/create">Create New Book</a>
-<form method="get" action="" class="form-inline  line-gap">
-  {{ search_form|crispy }}
-  <input class="btn btn-secondary" type="submit" value="🔍">
-</form>
-{% if book_list %}
-<table class="table">
-  <tr>
-    <th>ID</th>
-    <th>Title</th>
-    <th>Author</th>
-    <th>Update</th>
-    <th>Delete</th>
-  </tr>
-  {% for book in book_list %}
-  <tr>
-    <td>
-      {{ book.id }}
-    </td>
-    <td>
-      {{ book.title }}
-    </td>
-    <td>
-      {{ book.author }}
-    </td>
-    <td>
-      <a href="{% url 'books:book-update' pk=book.id %}">Update</a>
-    </td>
-    <td>
-      <a style="color: red"
-         href="{% url 'books:book-delete' pk=book.id %}">Delete</a>
-    </td>
-  </tr>
-  {% endfor %}
-</table>
-{% else %}
-<p>There are no books in the service.</p>
-{% endif %}
+<section>
+  <nav>
+    <a href="/">Main Page</a>
+    <a href="/books">All Books</a>
+    <a href="/authors">All Authors</a>
+    <a href="/loans">Late Returns</a>
+  </nav>
+  <div class="btn__container">
+    <button class="btn btn-create">
+      <a href="/books/create">Create New Book</a>
+    </button>
+  </div>
+  <form method="get" action="" class="form-inline line-gap">
+    {{ search_form|crispy }}
+    <input class="btn btn-secondary" type="submit" value="🔍"/>
+  </form>
+  {% if book_list %}
+  <table class="table">
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Update</th>
+      <th>Delete</th>
+    </tr>
+    {% for book in book_list %}
+    <tr>
+      <td>{{ book.id }}</td>
+      <td>{{ book.title }}</td>
+      <td>{{ book.author }}</td>
+      <td>
+        <a href="{% url 'books:book-update' pk=book.id %}">Update</a>
+      </td>
+      <td>
+        <a style="color: red"
+           href="{% url 'books:book-delete' pk=book.id %}"
+        >Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <p>There are no books in the service.</p>
+  {% endif %}
+</section>
+</body>
+</html>

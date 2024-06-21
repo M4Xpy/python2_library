@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8"/>
   <title>Library System</title>
+  <link rel="stylesheet" href="../../static/index.css"/>
 </head>
 <body>
 <h1>Library Service</h1>
-<a href="/books">All Books</a>
-<a href="/authors">All Authors</a>
-<a href="/loans">All Loans</a>
+<nav>
+  <a href="/books">All Books</a>
+  <a href="/authors">All Authors</a>
+  <a href="/loans">Late Returns</a>
+</nav>
 <h2>Loans</h2>
 <table>
   <thead>
@@ -17,7 +20,11 @@
     <th>Client</th>
     <th>Loan Date</th>
     <th>Return Date</th>
+    <th>Update</th>
+
+    <th>Delete</th>
     <th>Status</th>
+
   </tr>
   </thead>
   <tbody>
@@ -27,13 +34,17 @@
     <td>{{ loan.client.name }}</td>
     <td>{{ loan.loan_date }}</td>
     <td>{{ loan.return_date }}</td>
+    <td><a href="{% url 'loans:loan-update' pk=loan.id %}">Update</a></td>
+    <td><a style="color: red"
+           href="{% url 'loans:loan-delete' pk=loan.id %}"
+    >Delete</a>
     <td>
       {% if loan.is_overdue %}
-      <span style="color: red;">Overdue</span>
+      <span class="overdue">Overdue</span>
       {% elif loan.days_until_due <= 7 %}
-      <span style="color: #787838;">Due soon</span>
+      <span class="due-soon">Due soon</span>
       {% else %}
-      <span style="color: green;">On time</span>
+      <span class="on-time">On time</span>
       {% endif %}
     </td>
   </tr>

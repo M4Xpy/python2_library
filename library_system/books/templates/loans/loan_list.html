@@ -1,33 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Loan list</title>
+  <link rel="stylesheet" href="../../static/index.css"/>
+</head>
+<body>
 {% load crispy_forms_tags %}
+<section>
+  <nav>
+    <a href="/">Main Page</a>
+    <a href="/books">All Books</a>
+    <a href="/authors">All Authors</a>
+    <a href="/loans">Late Returns</a>
+  </nav>
+  <div class="btn__container">
+    <button class="btn btn-create">
+      <a href="/loans/create">Create New Loan</a>
+    </button>
+  </div>
+  <form method="get" action="" class="form-inline line-gap">
+    {{ search_form|crispy }}
+    <input class="btn btn-secondary" type="submit" value="🔍"/>
+  </form>
 
-<form method="get" action="" class="form-inline  line-gap">
-  {{ search_form|crispy }}
-  <input class="btn btn-secondary" type="submit" value="🔍">
-</form>
-<title>Loan list</title>
-<h1>Viewing debtor data</h1>
-<h2>Loans</h2>
-<table>
-  <thead>
-  <tr>
-    <th>Book</th>
-    <th>Client</th>
-    <th>Loan Date</th>
-    <th>Return Date</th>
-    <th>Status</th>
-  </tr>
-  </thead>
-  <tbody>
-  {% for loan in loan_list %}
-  <tr>
-    {% if loan.is_overdue %}
-    <td>{{ loan.book.title }}</td>
-    <td>{{ loan.client.name }}</td>
-    <td>{{ loan.loan_date }}</td>
-    <td>{{ loan.return_date }}</td>
-    <td>{{ loan.is_overdue }}</td>
-    {% endif %}
-  </tr>
-  {% endfor %}
-  </tbody>
-</table>
+  <h1>Viewing debtor data</h1>
+  <h2>Loans</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>Book</th>
+      <th>Client</th>
+      <th>Loan Date</th>
+      <th>Return Date</th>
+      <th>Update</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for loan in loan_list %}
+    <tr>
+      {% if loan.is_overdue %}
+      <td>{{ loan.book.title }}</td>
+      <td>{{ loan.client.name }}</td>
+      <td>{{ loan.loan_date }}</td>
+      <td>{{ loan.return_date }}</td>
+      <td><a href="{% url 'loans:loan-update' pk=loan.id %}">Update</a></td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</section>
+</body>
+</html>
