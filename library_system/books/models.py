@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from django.db import models
 from django.utils import timezone
 
@@ -29,7 +31,9 @@ class Loan(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     loan_date = models.DateField(default=timezone.now)
-    return_date = models.DateField()
+    return_date = models.DateField(
+        default=lambda: timezone.now().date() + timedelta(weeks=1)
+    )
 
     def is_overdue(self):
         return self.return_date < timezone.now().date()
