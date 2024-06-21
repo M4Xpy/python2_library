@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # third party apps
+    "debug_toolbar",
     "crispy_forms",
     # my apps
     "books",
@@ -44,6 +45,7 @@ INSTALLED_APPS = (
 
 MIDDLEWARE_CLASSES = (
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -109,3 +111,9 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
+print(STATIC_ROOT)
+INTERNAL_IPS = ['127.0.0.1', 'localhost']
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
